@@ -1,0 +1,79 @@
+<div class="card w-75 m-auto">
+    <div class="card-body container">
+        <div class="row">
+            <div class="col">
+                <div class="card-text"><b><u>Title: </u></b></div>
+                <div class="card-text"><p><%= @task.title %></p></div>
+            </div>
+
+            <div class="col">
+                <div class="card-text"><b><u>Description: </u></b></div>
+                <div class="card-text"><p><%= @task.description %></p></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="card-text"><b><u>Due Date: </u></b></div>
+                <div class="card-text"><p><%= @task.due_date %></p></div>
+            </div>
+
+            <div class="col">    
+                <div class="card-text"><b><u>Status: </u></b></div>
+                <div class="card-text"><p><%= @task.status %></p></div>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col">
+                <form>
+                    <label for="status"><u><b>You can change status from here</b></u></label>
+                    <select class="form-select w-50 my-2" aria-label="Default select example" name="status" id="status">
+                        <% if @task.status == 'Completed' %>
+                            <option value="Completed" selected>Completed</option>
+                            <option value="In Progress">In Progress</option>
+                        <% else %>
+                            <option value="Completed">Completed</option>
+                            <option value="In Progress" selected>In Progress</option>
+                        <% end %>
+                    </select>
+
+                <input type="submit" value="Change Status" class="btn btn-success my-3">
+                </form>
+            </div>
+
+            <div class="col">
+                <form>
+                    <label for="user_id">
+                        <u>
+                            <b>
+                                <% if @assign_task_to_user_id %>
+                                    This task is already assigned to
+                                <% else %>
+                                    You can Assign Task from here
+                                <% end %>
+                            </b>
+                        </u>
+                    </label>
+                    <%= select_tag(:user_id, options_for_select(@users,@assign_task_to_user_id), class: "form-select w-75 my-2", disabled: @assign_task_to_user_id) %>
+                    <% if !@assign_task_to_user_id %>
+                        <input type="submit" value="Assign Task" class="btn btn-success my-3">
+                    <% end %>
+                </form>
+            </div>
+        </div>
+
+        <div class="row my-4">
+            <div class="col">
+                <%= link_to "Edit", edit_task_path(@task), class: "btn btn-sm btn-success" %>
+                <%= link_to "Delete", task_path(@task), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure you want to delete?"
+                  }, class: "btn btn-sm btn-danger" %>
+                <%= link_to "Back to freinds", tasks_path, class: "btn btn-primary btn-sm"%>
+            </div>
+        </div>
+    </div>
+</div>
+   
+    

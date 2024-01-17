@@ -1,0 +1,34 @@
+
+<main class="task-container">
+
+    <%= link_to "Create Task", new_task_path, class: "create-button btn btn-success" %>
+    <table class="table">
+      <thead>
+        <tr>
+            <th scope="col" class="text-center">Title</th>
+            <th scope="col" class="text-center">Description</th>
+            <th scope="col" class="text-center">Date</th>
+            <th scope="col" class="text-center">status</th>
+            <th scope="col" class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @tasksCreated.each do | task |  %>
+            <tr>
+                <td class="text-center"><%= link_to task.title, task, class:"a" %></td>
+                <td class="text-center" title="<%= task.description %>"><%= task.description[0..30] %></td>
+                <td class="text-center"><%= task.due_date %></td>
+                <td class="text-center"><%= task.status %></td>
+                <td class="d-inline-flex w-100 justify-content-evenly align-item-center">
+                    <%= link_to "Edit", edit_task_path(task), class: "btn btn-sm btn-success" %>
+                    <%= link_to "Delete", task_path(task), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure you want to delete?"
+                  }, class: "btn btn-sm btn-danger" %>
+                  
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+</main>
