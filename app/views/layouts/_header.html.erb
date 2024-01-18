@@ -11,6 +11,12 @@
         <li class="nav-item"> 
           <%= link_to "Created Task", root_path, class:"nav-link text-white" %>
         </li>
+
+        <li class="nav-item">
+          <%= link_to "Assigned Task", assign_user_tables_path, class: "nav-link text-white" %>
+        </li>
+
+
         <li class="nav-item">
           <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete, confirm: "Are you sure you want to sign out!" }, class:"nav-link text-white" %>
       </li>
@@ -22,5 +28,7 @@
       <li class="nav-item">
         <%= link_to "Sign In", new_user_session_path, class: "nav-link text-white" %>
       </li>
+
+
       <% end %>
 </nav>

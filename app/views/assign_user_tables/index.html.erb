@@ -1,0 +1,27 @@
+<div class="m-auto w-90">
+    <h1 class="text-success mb-4">Assigned Task</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col" class="bg-success text-white text-center">Task Title</th>
+                <th scope="col" class="bg-success text-white text-center">Task Description</th>
+                <th scope="col" class="bg-success text-white text-center">Task Due Date</th>
+                <th scope="col" class="bg-success text-white text-center">Assign By User Email</th>
+                <th scope="col" class="bg-success text-white text-center">Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @assignedTasks&.each do |assign_task| %>
+                <tr>
+                    <td class="text-center"><%= link_to assign_task['task_title'], assign_user_table_path(assign_task['id']), class:"text-dark text-decoration-none" %></td>
+                    <td class="text-center" title= "<%= assign_task['task_description'] %>"><%= assign_task['task_description'][0..20]%></td>
+                    <td class="text-center"><%= assign_task['task_due_date']%></td>
+                    <td class="text-center"><%= assign_task['assign_by_user_email']%></td>
+                    <td class="text-center"><%= assign_task['task_status']%></td>
+                </tr>
+            <% end %>
+            
+        </tbody>
+    </table>
+</div>

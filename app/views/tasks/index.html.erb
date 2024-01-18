@@ -1,21 +1,24 @@
+<div class="w-90 m-auto">
 
-<main class="task-container">
+    <div class="d-flex justify-content-between">
+         <h1 class="text-success mb-4">Created Task</h1>
 
-    <%= link_to "Create Task", new_task_path, class: "create-button btn btn-success" %>
+        <%= link_to "Create Task", new_task_path, class: "btn btn-success create-button" %>
+    </div>
     <table class="table">
-      <thead>
-        <tr>
-            <th scope="col" class="text-center">Title</th>
-            <th scope="col" class="text-center">Description</th>
-            <th scope="col" class="text-center">Date</th>
-            <th scope="col" class="text-center">status</th>
-            <th scope="col" class="text-center">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @tasksCreated.each do | task |  %>
+        <thead>
             <tr>
-                <td class="text-center"><%= link_to task.title, task, class:"a" %></td>
+                <th scope="col" class="text-center bg-success text-white">Title</th>
+                <th scope="col" class="text-center bg-success text-white">Description</th>
+                <th scope="col" class="text-center bg-success text-white">Date</th>
+                <th scope="col" class="text-center bg-success text-white">status</th>
+                <th scope="col" class="text-center bg-success text-white">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @tasksCreated.each do | task |  %>
+            <tr>
+                <td class="text-center"><%= link_to task.title, task, class:"text-dark text-decoration-none" %></td>
                 <td class="text-center" title="<%= task.description %>"><%= task.description[0..30] %></td>
                 <td class="text-center"><%= task.due_date %></td>
                 <td class="text-center"><%= task.status %></td>
@@ -28,7 +31,7 @@
                   
                 </td>
             </tr>
-        <% end %>
-    </tbody>
-</table>
-</main>
+            <% end %>
+        </tbody>
+    </table>
+</div>

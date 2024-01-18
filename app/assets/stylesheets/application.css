@@ -15,7 +15,7 @@
  */
 
 
-.task-container .create-button {
+.create-button {
     margin-top: 12px;
     margin-left: 22px;
     margin-bottom: 23px;
@@ -42,6 +42,10 @@
     color: black;
 }
 
-.w-30 {
-    width: 40%;
+.w-90 {
+    width: 90%;
+}
+
+.text-decoration-none {
+    text-decoration:  none;
 }

@@ -18,30 +18,6 @@
                 <div class="card-text"><p><%= @task.due_date %></p></div>
             </div>
 
-            <div class="col">    
-                <div class="card-text"><b><u>Status: </u></b></div>
-                <div class="card-text"><p><%= @task.status %></p></div>
-            </div>
-        </div>
-
-        <div class="row my-2">
-            <div class="col">
-                <form>
-                    <label for="status"><u><b>You can change status from here</b></u></label>
-                    <select class="form-select w-50 my-2" aria-label="Default select example" name="status" id="status">
-                        <% if @task.status == 'Completed' %>
-                            <option value="Completed" selected>Completed</option>
-                            <option value="In Progress">In Progress</option>
-                        <% else %>
-                            <option value="Completed">Completed</option>
-                            <option value="In Progress" selected>In Progress</option>
-                        <% end %>
-                    </select>
-
-                <input type="submit" value="Change Status" class="btn btn-success my-3">
-                </form>
-            </div>
-
             <div class="col">
                 <form>
                     <label for="user_id">
@@ -61,6 +37,28 @@
                     <% end %>
                 </form>
             </div>
+
+        
+        </div>
+
+        <div class="row my-2">
+            <div class="col">
+                <form>
+                    <label for="status"><u><b>You can change status from here</b></u></label>
+                    <select class="form-select w-25 my-2" aria-label="Default select example" name="status" id="status">
+                        <% if @task.status == 'Completed' %>
+                            <option value="Completed" selected>Completed</option>
+                            <option value="In Progress">In Progress</option>
+                        <% else %>
+                            <option value="Completed">Completed</option>
+                            <option value="In Progress" selected>In Progress</option>
+                        <% end %>
+                    </select>
+
+                <input type="submit" value="Change Status" class="btn btn-success my-3">
+                </form>
+            </div>
+
         </div>
 
         <div class="row my-4">

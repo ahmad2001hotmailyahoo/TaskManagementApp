@@ -1,0 +1,62 @@
+<% if @assignedTask[0] %>
+<div class="card w-75 m-auto border-light-success">
+    <div class="card-body container">
+        <div class="row">
+            <div class="col">
+                <div class="card-text"><b><u>Title: </u></b></div>
+                <div class="card-text">
+                   <p><%= @assignedTask[0]['task_title'] %></p>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card-text"><b><u>Description: </u></b></div>
+                <div class="card-text">
+                    <p><%= @assignedTask[0]['task_description'] %></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="card-text"><b><u>Due Date: </u></b></div>
+                <div class="card-text"><p><%= @assignedTask[0]['task_due_date'] %></p></div>
+            </div>
+
+            <div class="col">
+                <div class="card-text"><b><u>Assigned By: </u></b></div>
+                <div class="card-text"><p><%= @assignedTask[0]['assign_by_user_email'] %></p></div>
+            </div>
+
+            
+        </div>
+
+        <div class="row my-2">
+            <div class="col">
+                <form>
+                    <label for="status"><u><b>You can change status from here</b></u></label>
+                    <select class="form-select w-50 my-2" aria-label="Default select example" name="status" id="status">
+                        <% if @task_status == 'Completed' %>
+                            <option value="Completed" selected>Completed</option>
+                            <option value="In Progress">In Progress</option>
+                        <% else %>
+                            <option value="Completed">Completed</option>
+                            <option value="In Progress" selected>In Progress</option>
+                        <% end %>
+                    </select>
+
+                <input type="submit" value="Change Status" class="btn btn-success my-3">
+                </form>
+            </div>
+        </div>
+
+        <div class="row my-2">
+            <div class="col">
+                <%= link_to "Back to freinds", assign_user_tables_path, class: "btn btn-primary btn-sm"%>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
+   
+    
