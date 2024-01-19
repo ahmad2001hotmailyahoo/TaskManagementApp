@@ -1,7 +1,7 @@
 class Task < ApplicationRecord
     # model assocations
     belongs_to :user
-    has_one :assign_user_table
+    has_one :assign_user_table, dependent: :destroy
 
     # model validation
     validates :title, length: { in: 5..20 }

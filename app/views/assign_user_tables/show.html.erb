@@ -27,8 +27,6 @@
                 <div class="card-text"><b><u>Assigned By: </u></b></div>
                 <div class="card-text"><p><%= @assignedTask[0]['assign_by_user_email'] %></p></div>
             </div>
-
-            
         </div>
 
         <div class="row my-2">
@@ -52,11 +50,9 @@
 
         <div class="row my-2">
             <div class="col">
-                <%= link_to "Back to freinds", assign_user_tables_path, class: "btn btn-primary btn-sm"%>
+                <%= link_to "Back", :back, class: "btn btn-outline-success m-2" %>
             </div>
         </div>
     </div>
 </div>
 <% end %>
-   
-    
