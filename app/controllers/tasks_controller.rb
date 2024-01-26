@@ -50,7 +50,7 @@ class TasksController < ApplicationController
         if @task.save
             redirect_to @task, notice: "Task created sucessfully"
         else
-            redirect_to new_task_path, notice: "Task could not be created"
+            redirect_to new_task_path, notice: "Task could not be created #{@task.errors.full_messages.join(', ')}"
         end
     end
 
