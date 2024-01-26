@@ -8,7 +8,7 @@
 
             <div class="col">
                 <div class="card-text"><b><u>Description: </u></b></div>
-                <div class="card-text"><p><%= @task.description %></p></div>
+                <div class="card-text"><p><%= @task.description[0..20] %></p></div>
             </div>
         </div>
 
@@ -19,23 +19,17 @@
             </div>
 
             <div class="col">
-                <form>
-                    <label for="user_id">
-                        <u>
-                            <b>
-                                <% if @assign_task_to_user_id %>
-                                    This task is already assigned to
-                                <% else %>
-                                    You can Assign Task from here
-                                <% end %>
-                            </b>
-                        </u>
-                    </label>
-                    <%= select_tag(:user_id, options_for_select(@users,@assign_task_to_user_id), class: "form-select w-75 my-2", disabled: @assign_task_to_user_id) %>
-                    <% if !@assign_task_to_user_id %>
-                        <input type="submit" value="Assign Task" class="btn btn-success my-3">
-                    <% end %>
-                </form>
+                <%= form_with method: :get do |form| %>
+                    <%= form.label :user_id, class: "font-weight-bold text-underlined" %>
+                        <% if @assign_task_to_user_id %>
+                            This task is already assigned to
+                        <% else %>
+                            You can Assign Task from here
+                        <% end %>
+                  
+                    <%= select_tag(:user_id, options_for_select(@users,@assign_task_to_user_id), class: "form-select w-75 my-2") %>
+                    <%= form.submit "Assign Task", class: "btn btn-success my-3" %>
+                <% end %>
             </div>
 
         
@@ -43,20 +37,11 @@
 
         <div class="row my-2">
             <div class="col">
-                <form>
-                    <label for="status"><u><b>You can change status from here</b></u></label>
-                    <select class="form-select w-25 my-2" aria-label="Default select example" name="status" id="status">
-                        <% if @task.status == 'Completed' %>
-                            <option value="Completed" selected>Completed</option>
-                            <option value="In Progress">In Progress</option>
-                        <% else %>
-                            <option value="Completed">Completed</option>
-                            <option value="In Progress" selected>In Progress</option>
-                        <% end %>
-                    </select>
-
-                <input type="submit" value="Change Status" class="btn btn-success my-3">
-                </form>
+                <%= form_with method: :get do |form| %>
+                    <%= form.label :status, "You can change status from here", class: "font-weight-bold text-underlined" %>
+                    <%= select_tag(:status, options_for_select([["Completed","Completed"], ["In Progress","In Progress"]],selected: @task.status), class: "form-select w-25 my-2") %>
+                    <%= form.submit "Change Status", class:"btn btn-success my-3" %>
+                <% end %>
             </div>
 
         </div>
@@ -68,7 +53,7 @@
                     turbo_method: :delete,
                     turbo_confirm: "Are you sure you want to delete?"
                   }, class: "btn btn-sm btn-danger" %>
-                <%= link_to "Back", :back, class: "btn btn-outline-success btn-sm" %>
+                <%= link_to "Back", root_path, class: "btn btn-outline-success btn-sm" %>
             </div>
         </div>
     </div>

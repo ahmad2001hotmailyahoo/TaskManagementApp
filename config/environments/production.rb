@@ -64,6 +64,8 @@ Rails.application.configure do
   # want to log everything, set the level to "debug".
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
+  config.google_client_id = ENV['GOOGLE_CLIENT_ID']
+
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
@@ -83,6 +85,8 @@ Rails.application.configure do
 
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
+
+  config.assets.debug = true
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

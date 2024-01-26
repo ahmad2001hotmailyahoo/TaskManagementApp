@@ -3,22 +3,28 @@ class AssignUserTablesController <  ApplicationController
 
     def index
         @search_by_title = params[:title_search]
-        @assignedTasks =  Task.includes(:user, :assign_user_table).where('assign_user_tables.user_id =? AND tasks.title LIKE ?', current_user.id, "%#{@search_by_title}%").pluck("assign_user_tables.id, tasks.id, tasks.title, tasks.description, tasks.due_date, tasks.status, users.id, users.email, assign_user_tables.user_id")
+        @assignedTasks =  Task.joins(:assign_user_table, :user).where('assign_user_tables.user_id =? AND tasks.title LIKE ?', current_user.id, "%#{@search_by_title}%").pluck("assign_user_tables.id, tasks.id, tasks.title, tasks.description, tasks.due_date, tasks.status, users.id, users.email, assign_user_tables.user_id")
         @assignedTasks = convertToMap @assignedTasks
     end
 
     def show
-        @assignedTask =  Task.includes(:user, :assign_user_table).where('assign_user_tables.user_id =? AND assign_user_tables.id=?', current_user.id, params[:id]).pluck("assign_user_tables.id, tasks.id, tasks.title, tasks.description, tasks.due_date, tasks.status, users.id, users.email, assign_user_tables.user_id")
-
-        puts @assignedTask.class
+        @assignedTask =  Task.joins(:assign_user_table, :user).where('assign_user_tables.user_id =? AND assign_user_tables.id=?', current_user.id, params[:id]).pluck("assign_user_tables.id, tasks.id, tasks.title, tasks.description, tasks.due_date, tasks.status, users.id, users.email, assign_user_tables.user_id")
         @assignedTask = convertToMap @assignedTask
+        @assignedTask = @assignedTask&.first
 
-        if params[:status] && @assignedTask[0] && @assignedTask[0]['assign_to_user_id'] == current_user.id 
-            @task = Task.find(@assignedTask[0]['task_id'])
+        if params[:status] && @assignedTask && @assignedTask['assign_to_user_id'] == current_user.id 
+            @task = Task.find(@assignedTask['task_id'])
+            @assign_user_table = AssignUserTable.find_by(task_id: @assignedTask['task_id'])
+            @task.update_column(:status, params[:status])
+            if params[:status] == 'Completed'
+                puts @assignedTask['assign_by_user_id']
+                @assign_user_table.update_column(:user_id, @assignedTask['assign_by_user_id'])
+                redirect_to assign_user_table_path
+            end
             @task.update_column(:status, params[:status])
             @task_status = params[:status]
         else
-            @assignedTask[0] ? @task_status = @assignedTask[0]['task_status'] : @task_status= nill
+            @assignedTask ? @task_status = @assignedTask['task_status'] : @task_status= nil
         end
 
     end

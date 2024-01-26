@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header bg-success text-white"><h2>Edit <%= resource_name.to_s.humanize %></h2></div>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form p-2 container" }) do |f| %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :patch, class: "form p-2 container" }) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 
     <div class="row">
@@ -14,7 +14,14 @@
         <% end %>
       </div>
 
-      <div class="form-group col">
+       <div class="form-group col">
+        <%= f.label :full_name, class: "text-success" %><br />
+        <%= f.text_field :full_name, autofocus: true, autocomplete: "full_name", class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="row">
+       <div class="form-group col">
         <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
         <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
         <% if @minimum_password_length %>
@@ -22,17 +29,30 @@
           <em><%= @minimum_password_length %> characters minimum</em>
         <% end %>
       </div>
-    </div>
-  
-    <div class="row">
-       <div class="col form-group">
+
+      <div class="col form-group">
         <%= f.label :password_confirmation %><br />
         <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-        </div>
+      </div>
+    </div>
 
+
+    <div class="row">
       <div class="col form-group">
         <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
         <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <%= f.label :date_of_birth, class: "text-success" %><br />
+        <%= f.date_field :date_of_birth, class:"form-control", id:"exampleFormControlInput2" %>
+      </div>
+
+      <div  class="col form-group">
+        <%= f.label :gender, class: "text-success" %><br />
+        <%= f.select :gender, [["Male", "Male"], ["Female", "Female"]], { },  class: "form-select" %>
       </div>
     </div>
 
@@ -46,7 +66,7 @@
 
   </div>
 </div>
-
+  
 <div class="container my-1">
   <div class="card">
     <div class="card-header bg-success text-white px-2"><h3>Cancel my account</h3></div>
@@ -58,4 +78,6 @@
 
     <%= link_to "Back", :back, class: "text-success text-decoration-none m-2" %>
   </div>
+
+
 </div>

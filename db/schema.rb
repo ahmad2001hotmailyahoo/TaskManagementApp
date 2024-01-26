@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_16_130334) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_25_125215) do
   create_table "assign_user_tables", force: :cascade do |t|
     t.integer "task_id", null: false
     t.integer "user_id", null: false
@@ -39,6 +39,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_16_130334) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "Date"
+    t.string "full_name"
+    t.string "uid"
+    t.string "avatar_url"
+    t.string "provider"
+    t.string "date_of_birth", default: "", null: false
+    t.string "gender", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -13,16 +13,12 @@
 
         <div class="form-group mb-4">
             <label for="exampleFormControlInput2">Due date</label>
-            <%= form.date_field :due_date, class:"form-control" %>
+            <%= form.date_field :due_date, class:"form-control", id:"exampleFormControlInput2" %>
         </div>
 
 
         <div class="visibilty-hidden" >    
-            <% if task.status == "Completed"%>         
-                <%= form.select :status, [["Completed", "Completed"], ["In Progress", "In Progress"]], selected: "Completed" %>
-            <% else %>
-                <%= form.select :status, [["Completed", "Completed"], ["In Progress", "In Progress"]], selected: "In Progress" %>
-            <% end %>
+            <%= form.select :status, [["Completed","Completed"], ["In Progress","In Progress"]], selected: task.status ? task.status : "In Progress" , class: "form-select w-25 my-2" %>
         </div>
 
         <%= form.number_field :user_id, value: current_user.id , type:"hidden" %>
@@ -31,7 +27,5 @@
             <%= link_to "Back", :back, class: "btn btn-outline-success" %>
             <%= form.submit class: "btn btn-success"%>
         </div>
-
-
     <% end %>
-    </div>
+</div>

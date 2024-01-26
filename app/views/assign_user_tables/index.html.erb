@@ -1,4 +1,4 @@
-<div class="m-auto w-90">
+<div class="m-auto w-90 overflow-auto">
     <h1 class="text-success mb-4">Assigned Task</h1>
 
     <form class="form w-40 mb-4">
@@ -11,22 +11,22 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="col" class="bg-success text-white text-center">Task Title</th>
-                <th scope="col" class="bg-success text-white text-center">Task Description</th>
-                <th scope="col" class="bg-success text-white text-center">Task Due Date</th>
-                <th scope="col" class="bg-success text-white text-center">Assign By User Email</th>
-                <th scope="col" class="bg-success text-white text-center">Status</th>
+                <th scope="col" class="bg-success text-white text-center align-middle">Task Title</th>
+                <th scope="col" class="bg-success text-white text-center align-middle">Task Description</th>
+                <th scope="col" class="bg-success text-white text-center align-middle">Due Date</th>
+                <th scope="col" class="bg-success text-white text-center align-middle">Assign By User Email</th>
+                <th scope="col" class="bg-success text-white text-center align-middle">Status</th>
             </tr>
         </thead>
 
         <tbody>
             <% @assignedTasks&.each do |assign_task| %>
                 <tr>
-                    <td class="text-center"><%= link_to assign_task['task_title'], assign_user_table_path(assign_task['id']), class:"text-dark text-decoration-none" %></td>
-                    <td class="text-center" title= "<%= assign_task['task_description'] %>"><%= assign_task['task_description'][0..20]%></td>
-                    <td class="text-center"><%= assign_task['task_due_date']%></td>
-                    <td class="text-center"><%= assign_task['assign_by_user_email']%></td>
-                    <td class="text-center"><%= assign_task['task_status']%></td>
+                    <td class="text-center align-middle"><%= link_to assign_task['task_title'], assign_user_table_path(assign_task['id']), class:"text-dark text-decoration-none" %></td>
+                    <td class="text-center align-middle" title= "<%= assign_task['task_description'] %>"><%= assign_task['task_description'][0..20]%></td>
+                    <td class="text-center align-middle"><%= assign_task['task_due_date']%></td>
+                    <td class="text-center align-middle"><%= assign_task['assign_by_user_email']%></td>
+                    <td class="text-center align-middle"><%= assign_task['task_status']%></td>
                 </tr>
             <% end %>
             

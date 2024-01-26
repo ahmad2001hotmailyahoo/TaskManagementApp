@@ -10,36 +10,19 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
 
 
-.create-button {
-    margin-top: 12px;
-    margin-left: 22px;
-    margin-bottom: 23px;
-    cursor: pointer;
-}
+@import 'bootstrap'; 
+@import "bootstrap-sprockets";
 
 .visibilty-hidden {
     visibility:hidden;
 }
 
-.h-100-viewport {
-    height: 100vh;
-}
-
 .unodered-list {
     list-style: none;
     color: white;
-}
-
-/* .unodered-list li  */
-
-.a{
-    text-decoration: none;
-    color: black;
 }
 
 .w-40 {
@@ -52,4 +35,12 @@
 
 .text-decoration-none {
     text-decoration:  none;
+}
+
+.font-weight-bold {
+    font-weight: bold;
+} 
+
+.text-underlined{
+    text-decoration: underline;
 }
