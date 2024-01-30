@@ -57,9 +57,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   #   }
   # end
 
-  def auth
-    @auth ||= request.env['omniauth.auth']
-  end
+  # def auth
+  #   @auth ||= request.env['omniauth.auth']
+  # end
 
   # protected
 

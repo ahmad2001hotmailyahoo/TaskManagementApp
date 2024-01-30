@@ -1,0 +1,41 @@
+<%= form_for @account_holder, html: {class: "container"}, url: account_path(@account_holder), method: :patch do |f| %>
+  <div class="card">
+  <div class="card-header bg-success text-white"><h2>Edit User</h2></div>
+    <div class="row p-2">
+      <div class="form-group col">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row p-2">
+      <div class="form-group col">
+        <%= f.label :full_name, class: "text-success" %><br />
+        <%= f.text_field :full_name, autofocus: true, autocomplete: "full_name", class:"form-control" %>
+      </div>
+    </div>
+
+    <div class="row p-2">
+      <div class="col">
+        <%= f.label :date_of_birth, class: "text-success" %><br />
+        <%= f.date_field :date_of_birth, class:"form-control", id:"exampleFormControlInput2" %>
+      </div>
+    </div>
+
+    <div class="row p-2">
+      <div  class="col form-group">
+            <%= f.label :gender, class: "text-success" %><br />
+            <%= f.select :gender, [["Male", "Male"], ["Female", "Female"]], { },  class: "form-select" %>
+      </div>
+    </div>
+
+
+    <div class="row m-2"> 
+      <div class="actions">
+        <%= link_to  "Back", :back, class: "btn btn-success"%>
+        <%= f.submit "Update", class: "btn btn-success" %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

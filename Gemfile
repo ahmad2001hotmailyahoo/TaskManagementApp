@@ -87,3 +87,5 @@ gem 'jquery-rails'
 gem 'dartsass-sprockets'
 
 gem 'webpacker', '~> 5.0'
+
+gem 'friendly_id', '~> 5.1.0'

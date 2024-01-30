@@ -1,10 +1,17 @@
 <div class="m-auto w-90 overflow-auto">
     <h1 class="text-success mb-4">Assigned Task</h1>
 
-    <form class="form w-40 mb-4">
+    <form class="form w-75 mb-4">
         <div class="form-group d-flex">
             <input type="text" name="title_search" placeholder="Enter the title you want to search" class="form-control me-1", value= "<%= @search_by_title %>">
-            <input type="submit" class="btn btn-success ms-2" value="search">
+            <input type="submit" class="btn btn-success ms-2" value="search by title">
+        </div>
+    </form>
+
+    <form class="form w-75 mb-4">
+         <div class="form-group d-flex">
+            <input type="date" name="date_search" placeholder="Enter the title you want to search" class="form-control me-1", value= "<%= @search_by_date %>">
+            <input type="submit" class="btn btn-success ms-2" value="search by date">
         </div>
     </form>
     

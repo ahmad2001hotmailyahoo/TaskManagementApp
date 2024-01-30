@@ -16,7 +16,6 @@
             <%= form.date_field :due_date, class:"form-control", id:"exampleFormControlInput2" %>
         </div>
 
-
         <div class="visibilty-hidden" >    
             <%= form.select :status, [["Completed","Completed"], ["In Progress","In Progress"]], selected: task.status ? task.status : "In Progress" , class: "form-select w-25 my-2" %>
         </div>
