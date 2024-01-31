@@ -43,6 +43,11 @@
         <%= f.label :date_of_birth, class: "text-success" %><br />
         <%= f.date_field :date_of_birth, class:"form-control", id:"exampleFormControlInput2" %>
       </div>
+
+       <div class="form-group">
+        <%= f.label :role, class: "text-success" %><br />
+        <%= f.select :role, options_for_select([["isLead", "is Lead"], ["NotLead", "Not Lead"]] )%>
+      </div>
     </div>
 
     <div class="actions mb-3">

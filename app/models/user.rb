@@ -4,7 +4,8 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, 
-         :omniauthable, omniauth_providers: [:google_oauth2]  
+         :omniauthable, omniauth_providers: [:google_oauth2] 
+
 
   # validates :email, presence: true, uniqueness: true
   # validates :password, presence: true
@@ -19,8 +20,6 @@ class User < ApplicationRecord
   def self.find_for_google_oauth2(access_token, signed_in_resource=nil)
     data = access_token.info
     user = User.where(:email => data["email"]).first
-
-    puts data.inspect
 
     unless user
         user = User.create(

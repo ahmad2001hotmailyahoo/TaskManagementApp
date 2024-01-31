@@ -14,16 +14,19 @@
 
      <form class="form w-75 mb-4">
          <div class="form-group d-flex">
-            <input type="date" name="date_search" placeholder="Enter the title you want to search" class="form-control me-1", value= "<%= @search_by_date %>">
-            <input type="submit" class="btn btn-success ms-2" value="search by date">
+            <input type="date" name="start_date" placeholder="Enter the title you want to search" class="form-control me-1", value= "<%= @start_date %>">
+            <input type="date" name="end_date" placeholder="Enter the title you want to search" class="form-control me-1", value= "<%= @end_date %>">
+            <input type="submit" class="btn btn-success ms-2" value="search by due date" id="search_date_button">
         </div>
     </form>
+    
+    <div class="overflow-auto">
     <table class="table">
         <thead>
             <tr>
                 <th scope="col" class="text-center bg-success text-white align-middle">Title</th>
                 <th scope="col" class="text-center bg-success text-white align-middle">Description</th>
-                <th scope="col" class="text-center bg-success text-white align-middle">Date</th>
+                <th scope="col" class="text-center bg-success text-white align-middle">Due Date</th>
                 <th scope="col" class="text-center bg-success text-white align-middle">status</th>
                 <th scope="col" class="text-center bg-success text-white align-middle">Actions</th>
             </tr>
@@ -48,4 +51,9 @@
             <% end %>
         </tbody>
     </table>
+    </div>
+
+    <% if @tasksCreated && @tasksCreated&.count != 0 %>
+        <%== pagy_bootstrap_nav(@pagy) %>
+    <% end %>
 </div>

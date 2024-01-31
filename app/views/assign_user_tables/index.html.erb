@@ -1,42 +1,49 @@
+
 <div class="m-auto w-90 overflow-auto">
-    <h1 class="text-success mb-4">Assigned Task</h1>
+<h1 class="text-success mb-4">Assigned Task</h1>
 
-    <form class="form w-75 mb-4">
-        <div class="form-group d-flex">
-            <input type="text" name="title_search" placeholder="Enter the title you want to search" class="form-control me-1", value= "<%= @search_by_title %>">
-            <input type="submit" class="btn btn-success ms-2" value="search by title">
-        </div>
-    </form>
-
-    <form class="form w-75 mb-4">
-         <div class="form-group d-flex">
-            <input type="date" name="date_search" placeholder="Enter the title you want to search" class="form-control me-1", value= "<%= @search_by_date %>">
-            <input type="submit" class="btn btn-success ms-2" value="search by date">
-        </div>
-    </form>
-    
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col" class="bg-success text-white text-center align-middle">Task Title</th>
-                <th scope="col" class="bg-success text-white text-center align-middle">Task Description</th>
-                <th scope="col" class="bg-success text-white text-center align-middle">Due Date</th>
-                <th scope="col" class="bg-success text-white text-center align-middle">Assign By User Email</th>
-                <th scope="col" class="bg-success text-white text-center align-middle">Status</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <% @assignedTasks&.each do |assign_task| %>
-                <tr>
-                    <td class="text-center align-middle"><%= link_to assign_task['task_title'], assign_user_table_path(assign_task['id']), class:"text-dark text-decoration-none" %></td>
-                    <td class="text-center align-middle" title= "<%= assign_task['task_description'] %>"><%= assign_task['task_description'][0..20]%></td>
-                    <td class="text-center align-middle"><%= assign_task['task_due_date']%></td>
-                    <td class="text-center align-middle"><%= assign_task['assign_by_user_email']%></td>
-                    <td class="text-center align-middle"><%= assign_task['task_status']%></td>
-                </tr>
-            <% end %>
-            
-        </tbody>
-    </table>
+<form class="form w-75 mb-4">
+<div class="form-group d-flex">
+<input type="text" name="title_search" placeholder="Enter the title you want to search" class="form-control me-1", value= "<%= @search_by_title %>">
+<input type="submit" class="btn btn-success ms-2" value="search by title">
 </div>
+</form>
+
+<form class="form w-75 mb-4">
+<div class="form-group d-flex">
+    <input type="date" name="start_date" placeholder="Enter the title you want to search" class="form-control me-1", value= "<%= @start_date %>">
+    <input type="date" name="end_date" placeholder="Enter the title you want to search" class="form-control me-1", value= "<%= @end_date %>">
+    <input type="submit" class="btn btn-success ms-2" value="search by due date" id="search_date_button">
+</div>
+</form>
+<div class="overflow-auto">
+<table class="table">
+<thead>
+<tr>
+<th scope="col" class="bg-success text-white text-center align-middle">Task Title</th>
+<th scope="col" class="bg-success text-white text-center align-middle">Task Description</th>
+<th scope="col" class="bg-success text-white text-center align-middle">Due Date</th>
+<th scope="col" class="bg-success text-white text-center align-middle">Assign By User Email</th>
+<th scope="col" class="bg-success text-white text-center align-middle">Status</th>
+</tr>
+</thead>
+
+<tbody>
+<% @assignedTasks&.each do |assign_task| %>
+<tr>
+<td class="text-center align-middle"><%= link_to assign_task.title, assign_user_table_path(assign_task.assign_user_table.id), class:"text-dark text-decoration-none" %></td>
+<td class="text-center align-middle" title= "<%= assign_task.description %>"><%= assign_task.description[0..20] %></td>
+<td class="text-center align-middle"><%= assign_task.due_date %></td>
+<td class="text-center align-middle"><%= assign_task.user.email %></td>
+<td class="text-center align-middle"><%= assign_task.status %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+</div>
+
+<% if @assignedTasks&.count %>
+    <%== pagy_bootstrap_nav(@pagy) %> 
+<% end %>
+</div>
+

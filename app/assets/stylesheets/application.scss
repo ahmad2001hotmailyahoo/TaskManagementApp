@@ -12,12 +12,15 @@
  *
  */
 
-
 @import 'bootstrap'; 
 @import "bootstrap-sprockets";
 
+.overflow-x-hidden {
+    overflow-x: hidden;
+}
+
 .visibilty-hidden {
-    visibility:hidden;
+    visibility: hidden;
 }
 
 .w-40 {
@@ -34,7 +37,7 @@
 
 .font-weight-bold {
     font-weight: bold;
-} 
+}
 
 .text-underlined{
     text-decoration: underline;

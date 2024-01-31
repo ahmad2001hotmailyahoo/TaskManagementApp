@@ -1,22 +1,21 @@
 class TasksController < ApplicationController
     before_action :authenticate_user!
+    include Pagy::Backend
 
     def index
         @search_by_title = params[:title_search]
-        @search_by_date = params[:date_search]
+        @start_date = params[:start_date]
+        @end_date = params[:end_date]
 
         if @search_by_title
             @tasksCreated = Task.where("user_id = ? and title Like ?", current_user,  "%#{@search_by_title}%",)
-        elsif  @search_by_date.present?
-            begin
-                parsed_search_by_date = Date.strptime(@search_by_date, '%Y-%m-%d')
-                @tasksCreated = Task.where("user_id = ? and DATE(due_date) < ?", current_user, parsed_search_by_date)
-            rescue ArgumentError
-                Task.where("user_id = ?", current_user)
-            end
+        elsif  @start_date && @end_date && @end_date != '' && @start_date != ''
+            @tasksCreated = Task.where("user_id = ? and ( DATE(due_date) >= ? and DATE(due_date) <= ? )", current_user, Date.strptime(@start_date, '%Y-%m-%d'), Date.strptime(@end_date, '%Y-%m-%d'))
         else
             @tasksCreated =  Task.where("user_id = ?", current_user)
         end
+
+        @pagy, @tasksCreated = pagy(@tasksCreated)
     end
 
     def show
@@ -36,16 +35,20 @@ class TasksController < ApplicationController
             @assign_user_table.update_column(:user_id, params[:user_id])
             @assign_task_to_user_id = params[:user_id]
         end
-      
+
         User.all.each do |t1|
             @users << [t1.email, t1.id]
         end
-      
+
         if params[:status]
-            if params[:status] == 'Completed'
+            if params[:status] == 'Completed' && @assign_user_table
               @assign_user_table.update_column(:user_id, current_user.id)
-              @assign_user_table = AssignUserTable.find_by(task_id: params[:id])
-              @assign_task_to_user_id = @assign_user_table&.user_id
+              @assign_task_to_user_id = current_user.id
+            else
+                @assign_task = AssignUserTable.new(user_id: current_user.id, task_id: params[:id])
+                if @assign_task.save
+                    @assign_task_to_user_id =  current_user.id
+                end
             end
             @task.update_column(:status, params[:status])
         end

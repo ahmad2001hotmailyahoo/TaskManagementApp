@@ -89,3 +89,9 @@ gem 'dartsass-sprockets'
 gem 'webpacker', '~> 5.0'
 
 gem 'friendly_id', '~> 5.1.0'
+
+gem 'pagy', '~> 6.4' # omit patch digit
+
+gem "activeadmin", "~> 3.2"
+
+gem "pundit", "~> 2.3"
